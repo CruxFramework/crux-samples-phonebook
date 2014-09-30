@@ -1,0 +1,54 @@
+<xs:schema 
+xmlns="http://www.cruxframework.org/offline" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.cruxframework.org/offline" >
+<xs:element name="includes" type="Includes">
+<xs:annotation>
+<xs:documentation>Points to a resource on the application that must be manually insert into the application cache manifest list.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="excludes" type="Excludes">
+<xs:annotation>
+<xs:documentation>Specify which resources must be excluded from cache on appCache manifest file.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="include" type="Include">
+<xs:annotation>
+<xs:documentation>Points to a resource on the application that must be manually insert into the application cache manifest list.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="exclude" type="Exclude">
+<xs:annotation>
+<xs:documentation>Specify which resources must be excluded from cache on appCache manifest file.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="Includes" mixed="true">
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element ref="include" />
+</xs:choice>
+</xs:complexType>
+<xs:complexType name="Excludes" mixed="true">
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element ref="exclude" />
+</xs:choice>
+</xs:complexType>
+<xs:complexType name="Include" mixed="true">
+<xs:attribute name="path" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:complexType name="Exclude" mixed="true">
+<xs:attribute name="path" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:element name="offlineScreen" type="OfflineScreen">
+<xs:annotation>
+<xs:documentation>Define a new offline page. Offline pages associates themselves to a normal page and give it offline capabilities.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="OfflineScreen" mixed="true">
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element ref="includes" />
+<xs:element ref="excludes" />
+</xs:choice>
+<xs:attribute name="moduleName" type="xs:string" use="required"/>
+<xs:attribute name="screenId" type="xs:string" use="required"/>
+</xs:complexType>
+</xs:schema>

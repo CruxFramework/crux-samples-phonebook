@@ -1,0 +1,31 @@
+<xs:schema 
+xmlns="http://www.cruxframework.org/xdevice" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:c="http://www.cruxframework.org/crux" 
+attributeFormDefault="unqualified" 
+elementFormDefault="qualified" 
+targetNamespace="http://www.cruxframework.org/xdevice" >
+<xs:import schemaLocation="core.xsd" namespace="http://www.cruxframework.org/crux"/>
+<xs:import schemaLocation="gwt.xsd" namespace="http://www.cruxframework.org/crux/gwt"/>
+<xs:import schemaLocation="widgets.xsd" namespace="http://www.cruxframework.org/crux/widgets"/>
+<xs:import schemaLocation="smart-faces.xsd" namespace="http://www.cruxframework.org/crux/smart-faces"/>
+<xs:element name="xdevice" type="XDevice" >
+<xs:annotation>
+<xs:documentation>A view that describes a cross device widget on Crux.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="XDevice">
+<xs:choice maxOccurs="unbounded">
+<xs:group ref="c:widgetsCrossDev" >
+<xs:annotation>
+<xs:documentation>Accepts any valid widget</xs:documentation>
+</xs:annotation>
+</xs:group>
+<xs:any namespace="http://www.w3.org/1999/xhtml"/>
+</xs:choice>
+<xs:attribute name="useController" type="xs:string" use="required"/>
+<xs:attribute name="useResource" type="xs:string"/>
+<xs:attribute name="width" type="xs:string"/>
+<xs:attribute name="height" type="xs:string"/>
+</xs:complexType>
+</xs:schema>

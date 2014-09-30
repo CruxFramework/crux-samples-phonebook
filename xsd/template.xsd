@@ -1,0 +1,36 @@
+<xs:schema 
+xmlns="http://www.cruxframework.org/templates" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+attributeFormDefault="unqualified" 
+elementFormDefault="qualified" 
+targetNamespace="http://www.cruxframework.org/templates" >
+<xs:import schemaLocation="gwt.xsd" namespace="http://www.cruxframework.org/crux/gwt"/>
+<xs:import schemaLocation="widgets.xsd" namespace="http://www.cruxframework.org/crux/widgets"/>
+<xs:import schemaLocation="smart-faces.xsd" namespace="http://www.cruxframework.org/crux/smart-faces"/>
+<xs:element name="template" type="Template" >
+<xs:annotation>
+<xs:documentation>Template allow you to define a block of declarative code that can be used on any other declarative file.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="Template">
+<xs:choice>
+<xs:any minOccurs="0" maxOccurs="unbounded"/>
+</xs:choice>
+<xs:attribute name="library" type="xs:string" use="required"/>
+<xs:attribute name="useController" type="xs:string"/>
+<xs:attribute name="useResource" type="xs:string"/>
+<xs:attribute name="useFormatter" type="xs:string"/>
+<xs:attribute name="useDataSource" type="xs:string"/>
+</xs:complexType>
+<xs:element name="section" type="Section" >
+<xs:annotation>
+<xs:documentation>A section defines a new tag child into the generated template XSD. The child tag will be inserted into the position where is placed the section tag declaration.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="Section">
+<xs:choice>
+<xs:any minOccurs="0" maxOccurs="unbounded"/>
+</xs:choice>
+<xs:attribute name="name" type="xs:string" use="required"/>
+</xs:complexType>
+</xs:schema>

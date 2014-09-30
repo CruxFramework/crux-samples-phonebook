@@ -1,0 +1,441 @@
+<xs:schema 
+xmlns="http://www.cruxframework.org/crux" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:_gwt="http://www.cruxframework.org/crux/gwt" 
+xmlns:_widgets="http://www.cruxframework.org/crux/widgets" 
+xmlns:_smart-faces="http://www.cruxframework.org/crux/smart-faces" 
+attributeFormDefault="unqualified" 
+elementFormDefault="qualified" 
+targetNamespace="http://www.cruxframework.org/crux" >
+<xs:import schemaLocation="gwt.xsd" namespace="http://www.cruxframework.org/crux/gwt"/>
+<xs:import schemaLocation="widgets.xsd" namespace="http://www.cruxframework.org/crux/widgets"/>
+<xs:import schemaLocation="smart-faces.xsd" namespace="http://www.cruxframework.org/crux/smart-faces"/>
+<xs:element name="splashScreen" type="SplashScreen">
+<xs:annotation>
+<xs:documentation>A splash screen component that is show while the Crux module is loading.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="SplashScreen">
+<xs:attribute name="style" type="xs:string"/>
+<xs:attribute name="transactionDelay" type="xs:integer"/>
+</xs:complexType>
+<xs:element name="screen" type="Screen">
+<xs:annotation>
+<xs:documentation>Screen tag defines a root view, associated with the document page.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:group name="ScreenContent">
+<xs:choice>
+<xs:any minOccurs="0" maxOccurs="unbounded"/>
+</xs:choice>
+</xs:group>
+<xs:complexType name="Screen" mixed="true">
+<xs:group ref="ScreenContent" />
+<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="fragment" type="xs:string"/>
+<xs:attribute name="useController" type="xs:string"/>
+<xs:attribute name="useResource" type="xs:string"/>
+<xs:attribute name="useFormatter" type="xs:string"/>
+<xs:attribute name="useDataSource" type="xs:string"/>
+<xs:attribute name="useView" type="xs:string"/>
+<xs:attribute name="onClosing" type="xs:string"/>
+<xs:attribute name="onClose" type="xs:string"/>
+<xs:attribute name="onResized" type="xs:string"/>
+<xs:attribute name="onLoad" type="xs:string"/>
+<xs:attribute name="onActivate" type="xs:string"/>
+<xs:attribute name="onHistoryChanged" type="xs:string"/>
+<xs:attribute name="width" type="xs:string"/>
+<xs:attribute name="height" type="xs:string"/>
+<xs:attribute name="dataObject" type="xs:string"/>
+<xs:attribute name="smallViewport" type="xs:string"/>
+<xs:attribute name="largeViewport" type="xs:string"/>
+<xs:attribute name="disableRefresh" type="xs:boolean" default="false" />
+</xs:complexType>
+<xs:element name="crossDevice" type="CrossDevice">
+<xs:annotation>
+<xs:documentation>A block of code that allow decision about what render on view, based on the device used to access the application.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="CrossDevice">
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:group ref="widgetsCrossDev" />
+<xs:element name="conditions" type="CrossDeviceConditions" >
+<xs:annotation>
+<xs:documentation>A set of conditions for a crossDevice tag.</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:choice>
+</xs:complexType>
+<xs:complexType name="CrossDeviceConditions">
+<xs:sequence minOccurs="1" maxOccurs="unbounded">
+<xs:element name="condition" type="CrossDeviceCondition" >
+<xs:annotation>
+<xs:documentation>A condition for a crossDevice tag.</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CrossDeviceCondition">
+<xs:choice minOccurs="1" maxOccurs="unbounded">
+<xs:element name="parameter" type="CrossDeviceParameterCondition" >
+<xs:annotation>
+<xs:documentation>A parameter for a crossDevice tag condition.</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:choice>
+<xs:attribute name="when" type="DeviceType" use="required"/>
+</xs:complexType>
+<xs:complexType name="CrossDeviceParameterCondition">
+<xs:attribute name="name" type="xs:string" use="required"/>
+<xs:attribute name="value" type="xs:string" use="required"/>
+</xs:complexType>
+<xs:simpleType name="DeviceType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="largeDisplayMouse" />
+<xs:enumeration value="largeDisplayTouch" />
+<xs:enumeration value="largeDisplayArrows" />
+<xs:enumeration value="smallDisplayTouch" />
+<xs:enumeration value="smallDisplayArrows" />
+<xs:enumeration value="all" />
+</xs:restriction>
+</xs:simpleType>
+<xs:group name="widgets">
+<xs:choice>
+<xs:element ref="_gwt:dockPanel" />
+<xs:element ref="_gwt:focusPanel" />
+<xs:element ref="_gwt:popupPanel" />
+<xs:element ref="_gwt:lazyPanel" />
+<xs:element ref="_gwt:dialogBox" />
+<xs:element ref="_gwt:absolutePanel" />
+<xs:element ref="_gwt:HTML" />
+<xs:element ref="_gwt:cellTable" />
+<xs:element ref="_gwt:fileUpload" />
+<xs:element ref="_gwt:stackLayoutPanel" />
+<xs:element ref="_gwt:menuBar" />
+<xs:element ref="_gwt:listBox" />
+<xs:element ref="_gwt:deckPanel" />
+<xs:element ref="_gwt:resetButton" />
+<xs:element ref="_gwt:inlineHTML" />
+<xs:element ref="_gwt:hyperlink" />
+<xs:element ref="_gwt:image" />
+<xs:element ref="_gwt:pageSizePager" />
+<xs:element ref="_gwt:canvas" />
+<xs:element ref="_gwt:formPanel" />
+<xs:element ref="_gwt:decoratedTabBar" />
+<xs:element ref="_gwt:textBox" />
+<xs:element ref="_gwt:simplePager" />
+<xs:element ref="_gwt:horizontalPanel" />
+<xs:element ref="_gwt:tree" />
+<xs:element ref="_gwt:datePicker" />
+<xs:element ref="_gwt:decoratedPopupPanel" />
+<xs:element ref="_gwt:inlineHyperlink" />
+<xs:element ref="_gwt:notificationMole" />
+<xs:element ref="_gwt:pushButton" />
+<xs:element ref="_gwt:cellWidget" />
+<xs:element ref="_gwt:checkBox" />
+<xs:element ref="_gwt:dateBox" />
+<xs:element ref="_gwt:disclosurePanel" />
+<xs:element ref="_gwt:HTMLPanel" />
+<xs:element ref="_gwt:tabLayoutPanel" />
+<xs:element ref="_gwt:passwordTextBox" />
+<xs:element ref="_gwt:frame" />
+<xs:element ref="_gwt:simpleRadioButton" />
+<xs:element ref="_gwt:integerBox" />
+<xs:element ref="_gwt:hidden" />
+<xs:element ref="_gwt:suggestBox" />
+<xs:element ref="_gwt:decoratorPanel" />
+<xs:element ref="_gwt:splitLayoutPanel" />
+<xs:element ref="_gwt:doubleBox" />
+<xs:element ref="_gwt:tabBar" />
+<xs:element ref="_gwt:captionPanel" />
+<xs:element ref="_gwt:richTextArea" />
+<xs:element ref="_gwt:flowPanel" />
+<xs:element ref="_gwt:video" />
+<xs:element ref="_gwt:numberLabel" />
+<xs:element ref="_gwt:headerPanel" />
+<xs:element ref="_gwt:button" />
+<xs:element ref="_gwt:radioButton" />
+<xs:element ref="_gwt:textButton" />
+<xs:element ref="_gwt:namedFrame" />
+<xs:element ref="_gwt:horizontalSplitPanel" />
+<xs:element ref="_gwt:stackPanel" />
+<xs:element ref="_gwt:audio" />
+<xs:element ref="_gwt:decoratedStackPanel" />
+<xs:element ref="_gwt:decoratedTabPanel" />
+<xs:element ref="_gwt:simplePanel" />
+<xs:element ref="_gwt:inlineLabel" />
+<xs:element ref="_gwt:submitButton" />
+<xs:element ref="_gwt:nativeHorizontalScrollbar" />
+<xs:element ref="_gwt:verticalSplitPanel" />
+<xs:element ref="_gwt:cellBrowser" />
+<xs:element ref="_gwt:longBox" />
+<xs:element ref="_gwt:label" />
+<xs:element ref="_gwt:cellList" />
+<xs:element ref="_gwt:cellTree" />
+<xs:element ref="_gwt:layoutPanel" />
+<xs:element ref="_gwt:dateLabel" />
+<xs:element ref="_gwt:verticalPanel" />
+<xs:element ref="_gwt:simpleCheckBox" />
+<xs:element ref="_gwt:grid" />
+<xs:element ref="_gwt:anchor" />
+<xs:element ref="_gwt:scrollPanel" />
+<xs:element ref="_gwt:dockLayoutPanel" />
+<xs:element ref="_gwt:tabPanel" />
+<xs:element ref="_gwt:nativeVerticalScrollbar" />
+<xs:element ref="_gwt:toggleButton" />
+<xs:element ref="_gwt:flexTable" />
+<xs:element ref="_gwt:textArea" />
+<xs:element ref="_widgets:slider" />
+<xs:element ref="_widgets:simpleViewContainer" />
+<xs:element ref="_widgets:horizontalSwapPanel" />
+<xs:element ref="_widgets:dialogBox" />
+<xs:element ref="_widgets:colorPickerDialog" />
+<xs:element ref="_widgets:menuTabsDisposal" />
+<xs:element ref="_widgets:dataGrid" />
+<xs:element ref="_widgets:singleSelect" />
+<xs:element ref="_widgets:maskedLabel" />
+<xs:element ref="_widgets:button" />
+<xs:element ref="_widgets:transferList" />
+<xs:element ref="_widgets:timer" />
+<xs:element ref="_widgets:tabViewContainer" />
+<xs:element ref="_widgets:horizontalSwapViewContainer" />
+<xs:element ref="_widgets:sortableList" />
+<xs:element ref="_widgets:rssPanel" />
+<xs:element ref="_widgets:promoBanner" />
+<xs:element ref="_widgets:progressBar" />
+<xs:element ref="_widgets:selectablePanel" />
+<xs:element ref="_widgets:styledPanel" />
+<xs:element ref="_widgets:listShuttle" />
+<xs:element ref="_widgets:sequentialPager" />
+<xs:element ref="_widgets:maskedTextBox" />
+<xs:element ref="_widgets:image" />
+<xs:element ref="_widgets:downloadButton" />
+<xs:element ref="_widgets:numberTextBox" />
+<xs:element ref="_widgets:viewChoiceDisposal" />
+<xs:element ref="_widgets:topMenuDisposal" />
+<xs:element ref="_widgets:dialogViewContainer" />
+<xs:element ref="_widgets:fileUploader" />
+<xs:element ref="_widgets:datePicker" />
+<xs:element ref="_widgets:storyboard" />
+<xs:element ref="_widgets:formDisplay" />
+<xs:element ref="_widgets:scrollBanner" />
+<xs:element ref="_widgets:filter" />
+<xs:element ref="_widgets:adaptiveGrid" />
+<xs:element ref="_widgets:randomPager" />
+<xs:element ref="_widgets:swapViewContainer" />
+<xs:element ref="_widgets:grid" />
+<xs:element ref="_widgets:anchor" />
+<xs:element ref="_widgets:rollingTabPanel" />
+<xs:element ref="_widgets:slideshow" />
+<xs:element ref="_widgets:dateBox" />
+<xs:element ref="_widgets:topToolBar" />
+<xs:element ref="_widgets:stackMenu" />
+<xs:element ref="_widgets:rollingPanel" />
+<xs:element ref="_widgets:textArea" />
+<xs:element ref="_smart-faces:scrollablePager" />
+<xs:element ref="_smart-faces:simpleViewContainer" />
+<xs:element ref="_smart-faces:popupPanel" />
+<xs:element ref="_smart-faces:dialogBox" />
+<xs:element ref="_smart-faces:articlePanel" />
+<xs:element ref="_smart-faces:navPanel" />
+<xs:element ref="_smart-faces:headerPanel" />
+<xs:element ref="_smart-faces:button" />
+<xs:element ref="_smart-faces:predictivePager" />
+<xs:element ref="_smart-faces:sideMenuDisposal" />
+<xs:element ref="_smart-faces:selectablePanel" />
+<xs:element ref="_smart-faces:html" />
+<xs:element ref="_smart-faces:comboBox" />
+<xs:element ref="_smart-faces:simpleCrawlableViewContainer" />
+<xs:element ref="_smart-faces:orderedList" />
+<xs:element ref="_smart-faces:unorderedList" />
+<xs:element ref="_smart-faces:sequentialPager" />
+<xs:element ref="_smart-faces:waitBox" />
+<xs:element ref="_smart-faces:image" />
+<xs:element ref="_smart-faces:asidePanel" />
+<xs:element ref="_smart-faces:topMenuDisposal" />
+<xs:element ref="_smart-faces:dialogViewContainer" />
+<xs:element ref="_smart-faces:label" />
+<xs:element ref="_smart-faces:menu" />
+<xs:element ref="_smart-faces:widgetList" />
+<xs:element ref="_smart-faces:progressBox" />
+<xs:element ref="_smart-faces:confirm" />
+<xs:element ref="_smart-faces:sectionPanel" />
+<xs:element ref="_smart-faces:footerPanel" />
+<xs:element ref="_smart-faces:progress" />
+<xs:element ref="_smart-faces:tabPanel" />
+<xs:element ref="_smart-faces:questionBox" />
+<xs:element ref="_smart-faces:messageBox" />
+<xs:element ref="_smart-faces:rollingPanel" />
+<xs:element ref="crossDevice" />
+</xs:choice>
+</xs:group>
+<xs:group name="widgetsCrossDev">
+<xs:choice>
+<xs:element ref="_gwt:dockPanel" />
+<xs:element ref="_gwt:focusPanel" />
+<xs:element ref="_gwt:popupPanel" />
+<xs:element ref="_gwt:lazyPanel" />
+<xs:element ref="_gwt:dialogBox" />
+<xs:element ref="_gwt:absolutePanel" />
+<xs:element ref="_gwt:HTML" />
+<xs:element ref="_gwt:cellTable" />
+<xs:element ref="_gwt:fileUpload" />
+<xs:element ref="_gwt:stackLayoutPanel" />
+<xs:element ref="_gwt:menuBar" />
+<xs:element ref="_gwt:listBox" />
+<xs:element ref="_gwt:deckPanel" />
+<xs:element ref="_gwt:resetButton" />
+<xs:element ref="_gwt:inlineHTML" />
+<xs:element ref="_gwt:hyperlink" />
+<xs:element ref="_gwt:image" />
+<xs:element ref="_gwt:pageSizePager" />
+<xs:element ref="_gwt:canvas" />
+<xs:element ref="_gwt:formPanel" />
+<xs:element ref="_gwt:decoratedTabBar" />
+<xs:element ref="_gwt:textBox" />
+<xs:element ref="_gwt:simplePager" />
+<xs:element ref="_gwt:horizontalPanel" />
+<xs:element ref="_gwt:tree" />
+<xs:element ref="_gwt:datePicker" />
+<xs:element ref="_gwt:decoratedPopupPanel" />
+<xs:element ref="_gwt:inlineHyperlink" />
+<xs:element ref="_gwt:notificationMole" />
+<xs:element ref="_gwt:pushButton" />
+<xs:element ref="_gwt:cellWidget" />
+<xs:element ref="_gwt:checkBox" />
+<xs:element ref="_gwt:dateBox" />
+<xs:element ref="_gwt:disclosurePanel" />
+<xs:element ref="_gwt:HTMLPanel" />
+<xs:element ref="_gwt:tabLayoutPanel" />
+<xs:element ref="_gwt:passwordTextBox" />
+<xs:element ref="_gwt:frame" />
+<xs:element ref="_gwt:simpleRadioButton" />
+<xs:element ref="_gwt:integerBox" />
+<xs:element ref="_gwt:hidden" />
+<xs:element ref="_gwt:suggestBox" />
+<xs:element ref="_gwt:decoratorPanel" />
+<xs:element ref="_gwt:splitLayoutPanel" />
+<xs:element ref="_gwt:doubleBox" />
+<xs:element ref="_gwt:tabBar" />
+<xs:element ref="_gwt:captionPanel" />
+<xs:element ref="_gwt:richTextArea" />
+<xs:element ref="_gwt:flowPanel" />
+<xs:element ref="_gwt:video" />
+<xs:element ref="_gwt:numberLabel" />
+<xs:element ref="_gwt:headerPanel" />
+<xs:element ref="_gwt:button" />
+<xs:element ref="_gwt:radioButton" />
+<xs:element ref="_gwt:textButton" />
+<xs:element ref="_gwt:namedFrame" />
+<xs:element ref="_gwt:horizontalSplitPanel" />
+<xs:element ref="_gwt:stackPanel" />
+<xs:element ref="_gwt:audio" />
+<xs:element ref="_gwt:decoratedStackPanel" />
+<xs:element ref="_gwt:decoratedTabPanel" />
+<xs:element ref="_gwt:simplePanel" />
+<xs:element ref="_gwt:inlineLabel" />
+<xs:element ref="_gwt:submitButton" />
+<xs:element ref="_gwt:nativeHorizontalScrollbar" />
+<xs:element ref="_gwt:verticalSplitPanel" />
+<xs:element ref="_gwt:cellBrowser" />
+<xs:element ref="_gwt:longBox" />
+<xs:element ref="_gwt:label" />
+<xs:element ref="_gwt:cellList" />
+<xs:element ref="_gwt:cellTree" />
+<xs:element ref="_gwt:layoutPanel" />
+<xs:element ref="_gwt:dateLabel" />
+<xs:element ref="_gwt:verticalPanel" />
+<xs:element ref="_gwt:simpleCheckBox" />
+<xs:element ref="_gwt:grid" />
+<xs:element ref="_gwt:anchor" />
+<xs:element ref="_gwt:scrollPanel" />
+<xs:element ref="_gwt:dockLayoutPanel" />
+<xs:element ref="_gwt:tabPanel" />
+<xs:element ref="_gwt:nativeVerticalScrollbar" />
+<xs:element ref="_gwt:toggleButton" />
+<xs:element ref="_gwt:flexTable" />
+<xs:element ref="_gwt:textArea" />
+<xs:element ref="_widgets:slider" />
+<xs:element ref="_widgets:simpleViewContainer" />
+<xs:element ref="_widgets:horizontalSwapPanel" />
+<xs:element ref="_widgets:dialogBox" />
+<xs:element ref="_widgets:colorPickerDialog" />
+<xs:element ref="_widgets:menuTabsDisposal" />
+<xs:element ref="_widgets:dataGrid" />
+<xs:element ref="_widgets:singleSelect" />
+<xs:element ref="_widgets:maskedLabel" />
+<xs:element ref="_widgets:button" />
+<xs:element ref="_widgets:transferList" />
+<xs:element ref="_widgets:timer" />
+<xs:element ref="_widgets:tabViewContainer" />
+<xs:element ref="_widgets:horizontalSwapViewContainer" />
+<xs:element ref="_widgets:sortableList" />
+<xs:element ref="_widgets:rssPanel" />
+<xs:element ref="_widgets:promoBanner" />
+<xs:element ref="_widgets:progressBar" />
+<xs:element ref="_widgets:selectablePanel" />
+<xs:element ref="_widgets:styledPanel" />
+<xs:element ref="_widgets:listShuttle" />
+<xs:element ref="_widgets:sequentialPager" />
+<xs:element ref="_widgets:maskedTextBox" />
+<xs:element ref="_widgets:image" />
+<xs:element ref="_widgets:downloadButton" />
+<xs:element ref="_widgets:numberTextBox" />
+<xs:element ref="_widgets:viewChoiceDisposal" />
+<xs:element ref="_widgets:topMenuDisposal" />
+<xs:element ref="_widgets:dialogViewContainer" />
+<xs:element ref="_widgets:fileUploader" />
+<xs:element ref="_widgets:datePicker" />
+<xs:element ref="_widgets:storyboard" />
+<xs:element ref="_widgets:formDisplay" />
+<xs:element ref="_widgets:scrollBanner" />
+<xs:element ref="_widgets:filter" />
+<xs:element ref="_widgets:adaptiveGrid" />
+<xs:element ref="_widgets:randomPager" />
+<xs:element ref="_widgets:swapViewContainer" />
+<xs:element ref="_widgets:grid" />
+<xs:element ref="_widgets:anchor" />
+<xs:element ref="_widgets:rollingTabPanel" />
+<xs:element ref="_widgets:slideshow" />
+<xs:element ref="_widgets:dateBox" />
+<xs:element ref="_widgets:topToolBar" />
+<xs:element ref="_widgets:stackMenu" />
+<xs:element ref="_widgets:rollingPanel" />
+<xs:element ref="_widgets:textArea" />
+<xs:element ref="_smart-faces:scrollablePager" />
+<xs:element ref="_smart-faces:simpleViewContainer" />
+<xs:element ref="_smart-faces:popupPanel" />
+<xs:element ref="_smart-faces:dialogBox" />
+<xs:element ref="_smart-faces:articlePanel" />
+<xs:element ref="_smart-faces:navPanel" />
+<xs:element ref="_smart-faces:headerPanel" />
+<xs:element ref="_smart-faces:button" />
+<xs:element ref="_smart-faces:predictivePager" />
+<xs:element ref="_smart-faces:sideMenuDisposal" />
+<xs:element ref="_smart-faces:selectablePanel" />
+<xs:element ref="_smart-faces:html" />
+<xs:element ref="_smart-faces:comboBox" />
+<xs:element ref="_smart-faces:simpleCrawlableViewContainer" />
+<xs:element ref="_smart-faces:orderedList" />
+<xs:element ref="_smart-faces:unorderedList" />
+<xs:element ref="_smart-faces:sequentialPager" />
+<xs:element ref="_smart-faces:waitBox" />
+<xs:element ref="_smart-faces:image" />
+<xs:element ref="_smart-faces:asidePanel" />
+<xs:element ref="_smart-faces:topMenuDisposal" />
+<xs:element ref="_smart-faces:dialogViewContainer" />
+<xs:element ref="_smart-faces:label" />
+<xs:element ref="_smart-faces:menu" />
+<xs:element ref="_smart-faces:widgetList" />
+<xs:element ref="_smart-faces:progressBox" />
+<xs:element ref="_smart-faces:confirm" />
+<xs:element ref="_smart-faces:sectionPanel" />
+<xs:element ref="_smart-faces:footerPanel" />
+<xs:element ref="_smart-faces:progress" />
+<xs:element ref="_smart-faces:tabPanel" />
+<xs:element ref="_smart-faces:questionBox" />
+<xs:element ref="_smart-faces:messageBox" />
+<xs:element ref="_smart-faces:rollingPanel" />
+</xs:choice>
+</xs:group>
+</xs:schema>

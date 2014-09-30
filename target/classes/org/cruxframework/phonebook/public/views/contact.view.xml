@@ -1,0 +1,128 @@
+<v:view 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:v="http://www.cruxframework.org/view" 
+	xmlns:core="http://www.cruxframework.org/crux" 
+	xmlns:crux="http://www.cruxframework.org/crux/widgets"
+	xmlns:gwt="http://www.cruxframework.org/crux/gwt"
+	xmlns:faces="http://www.cruxframework.org/crux/smart-faces" 
+	onActivate="contactController.onActivate"
+	dataObject="contact"
+	useController="contactController"
+	useDataSource="contactDS"> 
+
+	<!--Application header -->
+	<gwt:flowPanel id="panelTitle" styleName="panelTitle">
+		<faces:label id="labelTitle" text="${messages.title}"
+			styleName="fontTitle" horizontalAlignment="center" />
+		<gwt:flowPanel id="panelLanguage" styleName="language-box">
+			<crux:anchor id="languagePtbr" styleName="lang-ptbr"
+				href="/phonebook/index.html?locale=pt_BR" />
+			<crux:anchor id="languageEn" styleName="lang-en"
+				href="/phonebook/index.html?locale=en_US" />
+		</gwt:flowPanel>
+	</gwt:flowPanel>
+
+	<!--Grid Panel -->
+	<crux:styledPanel id="gridWrapper" styleName="grid-wrapper">
+		<gwt:flowPanel id="gridPanel">
+
+			<!--Search Panel -->
+			<gwt:flowPanel id="searchPanel" width="80%"
+				style="margin: 0px auto;">
+				<faces:label id="label" text="${messages.search}"
+					horizontalAlignment="left" />
+				<gwt:textBox id="txtSearch" width="60%"
+					placeHolder="${messages.placeHolder}" alignment="left" />
+				<faces:button id="btnSearch" text="${messages.btnSearch}"
+					width="20%" onSelect="contactController.searchContact" />
+				<faces:button id="btnList" text="${messages.btnList}"
+					width="20%" onSelect="contactController.loadData" />
+			</gwt:flowPanel>
+
+			<!--Grid -->
+			<crux:adaptiveGrid id="grid" width="100%"
+				styleName="grid" dataSource="contactDS" pageSize="8">
+				<crux:largeColumns>
+					<crux:dataColumn key="firstName" label="${messages.lblFirstName}" />
+					<crux:dataColumn key="lastName" label="${messages.lblLastName}" />
+					<crux:dataColumn key="phone" label="${messages.lblPhone}" />
+					<crux:widgetColumn key="actions" label="${messages.lblActions}">
+						<gwt:flowPanel id="btnGroup">
+							<faces:button id="btnDetail" text="${messages.btnDetail}"
+								onSelect="contactController.detail" tooltip="${messages.btnDetailToolTip}" />
+							<faces:button id="btnEdit" text="${messages.btnEdit}"
+								onSelect="contactController.edit" tooltip="${messages.btnEditToolTip}" />
+							<faces:button id="btnDelete" text="${messages.btnDelete}"
+								onSelect="contactController.delete" tooltip="${messages.btnDeleteToolTip}" />
+						</gwt:flowPanel>
+					</crux:widgetColumn>
+				</crux:largeColumns>
+				<crux:smallColumns>
+					<crux:dataColumn key="firstName" label="${messages.lblFirstName}" />
+				</crux:smallColumns>
+			</crux:adaptiveGrid>
+
+			<crux:randomPager id="randomPager" pageable="grid"
+				enabled="true" style="margin: 0px auto;" />
+
+		</gwt:flowPanel>
+	</crux:styledPanel>
+
+	<!--Contact Panel -->
+	<crux:styledPanel id="panelContact" styleName="wrapper-contact">
+		<crux:formDisplay id="form" width="100%">
+			<crux:entry>
+				<!--Title -->
+				<gwt:flowPanel id="panelTop" width="100%" height="40px">
+					<faces:label id="lblAction" text="${messages.stateDefault}"
+						horizontalAlignment="center" styleName="faces-Label actionLabel" />
+				</gwt:flowPanel>
+			</crux:entry>
+			<crux:entry label="${messages.formFirstName}"
+				horizontalAlignment="right">
+				<gwt:textBox id="txtFirstName" bindPath="firstName"
+					enabled="false" />
+			</crux:entry>
+			<crux:entry label="${messages.formLastName}"
+				horizontalAlignment="right">
+				<gwt:textBox id="txtLastName" bindPath="lastName"
+					enabled="false" />
+			</crux:entry>
+			<crux:entry label="${messages.formBirthDay}"
+				horizontalAlignment="right">
+				<crux:dateBox id="dateBoxBirthDay" bindPath="birthDay"
+					pattern="MM/dd/yyyy" enabled="false" />
+			</crux:entry>
+			<crux:entry label="${messages.formPhone}"
+				horizontalAlignment="right">
+				<crux:maskedTextBox id="maskTextPhone" bindPath="phone"
+					formatter="phoneFormatter" enabled="false" />
+			</crux:entry>
+			<crux:entry label="${messages.formEmail}"
+				horizontalAlignment="right">
+				<gwt:textBox id="txtEmail" bindPath="email" enabled="false" />
+			</crux:entry>
+			<crux:entry label="${messages.formGroup}"
+				horizontalAlignment="right">
+				<gwt:listBox id="listBoxGroup" enabled="false">
+					<gwt:item label="${messages.family}" value="family" />
+					<gwt:item label="${messages.friends}" value="friends" />
+					<gwt:item label="${messages.work}" value="work" />
+					<gwt:item label="${messages.others}" value="others"
+						selected="true" />
+				</gwt:listBox>
+			</crux:entry>
+			<crux:entry>
+				<gwt:flowPanel id="btnPanel" style="text-align:center;">
+					<faces:button id="btnAdd" text="${messages.btnAdd}"
+						onSelect="contactController.addContact" />
+					<faces:button id="btnSave" text="${messages.btnSave}"
+						onSelect="contactController.saveAddOrUpdate" enabled="false" />
+					<faces:button id="btnCancel" text="${messages.btnCancel}"
+						onSelect="contactController.cancel" enabled="false" />
+				</gwt:flowPanel>
+			</crux:entry>
+		</crux:formDisplay>
+	</crux:styledPanel>
+</v:view>
+
