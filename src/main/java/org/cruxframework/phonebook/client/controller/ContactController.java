@@ -77,7 +77,12 @@ public class ContactController
 	public void onActivate()
 	{
 		loadData();
+		testLiferayScriptInjection();
 	}
+	
+	private static native void testLiferayScriptInjection() /*-{
+	  	alert($wnd.parent.portalInfo);
+	}-*/;
 	
 	/**
 	 * Loads all contacts in the grid at method "getAll" of the Rest service. 
